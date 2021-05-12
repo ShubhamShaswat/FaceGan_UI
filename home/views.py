@@ -32,8 +32,10 @@ filename = 'media/img.jpg'
 def index(request):
     if request.method == 'POST':
         #this will donwload the generated image
+
+
         if request.POST.get('download_btn',None):
-            print('downlaod')
+            print('download')
             path_to_file = 'media/img.jpg'
             fname = 'img.jpg'
             fl = open(path_to_file,'rb').read()
@@ -57,6 +59,7 @@ def index(request):
         return HttpResponse(html_template.render({'img':('data:image/jpeg;base64, '+ frame_b64.decode("utf-8"))}, request))
             #return HttpResponseRedirect('')
 
+        """
         #this will donwload the generated image
         if request.POST.get('download_btn',None):
             path_to_file = 'media/img.jpg'
@@ -66,7 +69,7 @@ def index(request):
             response['Content-Disposition'] = "attachment; filename=%s" % fname
 
             return response
-
+        """
     else:
         return render(request, 'home/index2.html',context)
 
@@ -76,10 +79,8 @@ def about(request) :
 
 #REST request API
 def rest_request(seed, url=None):
-
     if url is None:
-        url = "http://35.223.166.214:8501/v1/models/my_model:predict"
-
+        url = "http://34.71.48.161:8501/v1/models/my_model:predict"
 
     payload = json.dumps({"signature_name": "serving_default","instances": seed.tolist()})
     response = requests.post(url,data=payload)

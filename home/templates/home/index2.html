@@ -61,13 +61,15 @@
                                 Use this faces in your meme instead of real ones
                             </p>
 
-                            <form  url="" method="post" id="target">
+                            <form  method="post" id="target">
                            	{% csrf_token %}
+                            <button type="submit"  class="btn btn-download" id="generate_btn" value='generate'><strong>Generate</strong></button>
+													</form>
 
-                            	<button type="submit"  class="btn btn-download" id="generate_btn" value='generate'><strong>Generate</strong></button>
-                        	</form>
-
-                            <button type="submit" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
+													<form  method="post" id="target_2">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
+												</form>
 
                         </div> <!-- /.banner-text -->
                     </div>
@@ -78,7 +80,7 @@
         <!-- /.container -->
     </section>
     <!-- /#header -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script  type="text/javascript">
 
       $("#target").submit(function() { // catch the form's submit event
@@ -93,6 +95,17 @@
       return false; // cancel original event to prevent form submitting
     });
 
+		$("#target_2").submit(function() { // catch the form's submit event
+			$.ajax({ // create an AJAX call...
+					data: $(this).serialize(), // get the form data
+					type: $(this).attr('method'), // GET or POST
+					url: $(this).attr('action'), // the file to call
+					success: function(response) { // on success..
+					
+					}
+			});
+		return false; // cancel original event to prevent form submitting
+	});
 
 
   </script>
