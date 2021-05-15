@@ -69,7 +69,7 @@
 														</form>
 
 
-													<button type="submit" data-id="download" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
+													<button type="submit" class="btn btn-download" id="download_btn"  value="download"><strong>Download</strong></button>
 
                         </div> <!-- /.banner-text -->
                     </div>
@@ -80,7 +80,7 @@
         <!-- /.container -->
     </section>
     <!-- /#header -->
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script  type="text/javascript">
 
       $("#target").submit(function() { // catch the form's submit event
@@ -95,8 +95,9 @@
       return false; // cancel original event to prevent form submitting
     });
 
-
-
+	$("#download_btn").click(function(){
+  	alert("The paragraph was clicked.");
+	});
   </script>
 
 </body>
