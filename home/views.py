@@ -32,8 +32,6 @@ filename = 'media/img.jpg'
 def index(request):
     if request.method == 'POST':
         #this will donwload the generated image
-
-
         if request.POST.get('download_btn',None):
             print('download')
             path_to_file = 'media/img.jpg'

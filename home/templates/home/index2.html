@@ -51,7 +51,9 @@
             <div class="starting">
                 <div class="row">
                     <div class="col-md-6" style="align-items: center;">
+											<div id = "showImage">
                         {% include "includes/imageDiv.html" %}
+											</div>
                     </div>
                     <div class="col-md-6">
                         <div class="banner-text">
@@ -63,13 +65,11 @@
 
                             <form  method="post" id="target">
                            	{% csrf_token %}
-                            <button type="submit"  class="btn btn-download" id="generate_btn" value='generate'><strong>Generate</strong></button>
-													</form>
+                            	<button type="submit" class="btn btn-download" id="generate_btn" value='generate'><strong>Generate</strong></button>
+														</form>
 
-													<form  method="post" id="target_2">
-													{% csrf_token %}
-													<button type="submit" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
-												</form>
+
+													<button type="submit" data-id="download" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
 
                         </div> <!-- /.banner-text -->
                     </div>
@@ -95,17 +95,6 @@
       return false; // cancel original event to prevent form submitting
     });
 
-		$("#target_2").submit(function() { // catch the form's submit event
-			$.ajax({ // create an AJAX call...
-					data: $(this).serialize(), // get the form data
-					type: $(this).attr('method'), // GET or POST
-					url: $(this).attr('action'), // the file to call
-					success: function(response) { // on success..
-					
-					}
-			});
-		return false; // cancel original event to prevent form submitting
-	});
 
 
   </script>
