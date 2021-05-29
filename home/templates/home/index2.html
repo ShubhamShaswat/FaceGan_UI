@@ -69,7 +69,7 @@
 														</form>
 
 
-													<button type="submit" class="btn btn-download" id="download_btn"  value="download"><strong>Download</strong></button>
+													<button type="submit" class="btn btn-download" id="download_btn" onclick="window.open('/media/img.jpg')" value="download"><strong>Download</strong></button>
 
                         </div> <!-- /.banner-text -->
                     </div>
@@ -95,9 +95,6 @@
       return false; // cancel original event to prevent form submitting
     });
 
-	$("#download_btn").click(function(){
-  	alert("The paragraph was clicked.");
-	});
   </script>
 
 </body>

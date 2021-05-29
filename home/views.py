@@ -6,12 +6,14 @@ from django.conf import settings
 from django.template import loader
 
 from django.utils.encoding import smart_str
-
+from .models import GeneratedImages
 import io
 import base64
 import cv2
 import json
 import requests
+from PIL import Image
+from django.core.files import File
 
 IMAGE_URL ='/static/images/4c1.jpg'
 
@@ -48,9 +50,12 @@ def index(request):
         rs = rest_request(seed=np.random.normal(size=(1,100)))
 
         frame = np.array(rs.json()['predictions'][0])[...,::-1]*255.
-        cv2.imwrite(filename, frame)
+        cv2.imwrite(filename, frame) #to dave the file
         frame_b64 = to_base64(frame)
-
+        #saving  image to models
+        #genImg = Image.open()
+        newImg = GeneratedImages()
+        newImg.img.save('img.jpg',File(open(filename,'rb')))
             #update context dict with new value
         #context.update({'img':('data:image/jpeg;base64, '+ frame_b64.decode("utf-8"))})
         html_template = loader.get_template( 'includes/imageDiv.html')
@@ -78,8 +83,8 @@ def about(request) :
 #REST request API
 def rest_request(seed, url=None):
     if url is None:
-        url = "http://34.71.48.161:8501/v1/models/my_model:predict"
-
+        #url = "http://34.71.48.161:8501/v1/models/my_model:predict"
+        url = "http://172.17.0.2:8501/v1/models/my_model:predict"
     payload = json.dumps({"signature_name": "serving_default","instances": seed.tolist()})
     response = requests.post(url,data=payload)
     return response
